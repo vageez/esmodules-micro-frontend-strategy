@@ -8,7 +8,7 @@ Some tools in existance today to support micro fronot end architecture. [Single 
 
 ### ESModules
 
-The state of ESModules in 2024 may have opened the possibility of easy micro front end architectures. along with services like [ESM SH](https://esm.sh/#docs)
+The state of ESModules in 2024 may have opened the possibility of easy micro front end architectures. together with services like [ESM SH](https://esm.sh/#docs), and remote importing of ESModules.
 
 ESModules (ECMAScript Modules), a standardized module system in JavaScript that allows developers to import and export functions, objects, and primitives across different files. ESModules are natively supported by modern browsers, providing a lightweight, efficient way to load and manage dependencies directly in the browser without the need for bundling tools.
 
