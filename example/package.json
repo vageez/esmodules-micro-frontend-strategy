@@ -1,0 +1,24 @@
+{
+    "name": "esmodule-micro-frontend-strategy",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "host": "serve ./host.app -l 8075 --debug -s",
+        "subapp1": "serve ./sub.app1 -l 8077 --debug --cors",
+        "subapp2": "serve ./sub.app2 -l 8078 --debug --cors",
+        "dev": "concurrently \"npm:host\" \"npm:subapp1\" \"npm:subapp2\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vageez/esmodules-micro-frontend-strategy.git"
+    },
+    "author": {
+        "name": "vageez",
+        "email": "vageez@gmail.com"
+    },
+    "private": true,
+    "devDependencies": {
+        "concurrently": "latest",
+        "serve": "latest"
+    }
+}

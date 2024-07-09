@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HOST APP</title>
+    <meta content="initial-scale=1, width=device-width" name="viewport"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script type="importmap">
+        {
+          "imports": {
+            "react": "https://esm.sh/react@beta",
+            "react-dom": "https://esm.sh/react-dom@beta/client",
+            "react-router-dom": "https://esm.sh/react-router-dom?deps=react@beta,react-dom@beta/client&bundle=all",
+            "sub-app1": "http://localhost:8077/index.js",
+            "sub-app2": "http://localhost:8078/index.js"
+          }
+        }
+    </script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script data-presets="react" data-type="module" src="/js/index.js" type="text/babel"></script>
+</body>
+</html>
