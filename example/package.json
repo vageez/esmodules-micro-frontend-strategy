@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "host": "serve ./host.app -l 8075 --debug -s",
+        "host": "serve ./host.app -l 8075 --debug -s & open http://localhost:8075",
         "subapp1": "serve ./sub.app1 -l 8077 --debug --cors",
         "subapp2": "serve ./sub.app2 -l 8078 --debug --cors",
         "dev": "concurrently \"npm:host\" \"npm:subapp1\" \"npm:subapp2\""
