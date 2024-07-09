@@ -14,37 +14,15 @@ ESModules (ECMAScript Modules), a standardized module system in JavaScript that 
 
 This preamble sets the stage for exploring the hypothesis that creating micro frontends with ESModules can significantly improve the modularity, scalability, and maintainability of large-scale web applications. By leveraging the inherent capabilities of ESModules, developers can achieve seamless integration of independently developed front-end modules, reducing the overhead associated with traditional module bundling and fostering a more agile and collaborative development environment.
 
-### Some struggles with implementing micro front ends to be addressed
+### Definition of a Micro Front End application architecture. 
+- A Parent application is required. Sometimes called the Host application.
+- Each (Micro Front End) application can be developed independantly and deployed independantly.
+- One or more Sub Applications contributing to a single application experience.
+    - Sub apps are imported into the Host application.
+    - Sub apps have their own development and deplopyment lifecycle
 
-- Creating a simple local development lifecycle.
- 
-- Complex Integration:
-Ensuring seamless integration of different micro frontends can be difficult, particularly when they are developed by separate teams using different technologies.
+### What makes this possible. 
+- Remotely hosted javascript modules (ESM.SH)[https://esm.sh/]
+- Importing remotely hosted javascript modules `const React from import('https://esm.sh/react@beta')`
+- Import Maps (IMPORTMAPS)[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap]
 
-- Consistent User Experience:
-Maintaining a consistent look and feel across various micro frontends is challenging, especially when different teams have varying design guidelines and implementation standards.
-
-- Performance Issues:
-Loading multiple micro frontends can lead to performance issues such as longer load times and increased resource usage.
-
-- Dependency Management:
-Handling shared dependencies across micro frontends without version conflicts requires careful planning and coordination.
-
-- Routing and Navigation:
-Implementing a cohesive routing mechanism that works seamlessly across different micro frontends can be complex.
-
-- Inter-Module Communication:
-Facilitating communication between different micro frontends while maintaining independence and avoiding tight coupling is challenging.
-
-- Deployment and Versioning:
-Coordinating the deployment of multiple micro frontends and managing their versions to ensure compatibility can be cumbersome.
-
-- Security Concerns:
-Ensuring security across multiple micro frontends, especially when they are developed and maintained by different teams, requires rigorous security practices.
-
-- Testing and Debugging:
-Testing and debugging a system composed of multiple micro frontends can be more complex compared to a monolithic application, necessitating more sophisticated tools and strategies.
-
-- Learning Curve:
-Teams need to adapt to new tools, technologies, and best practices for effectively implementing and managing micro frontends.
-Addressing these challenges is critical for the successful adoption of a micro frontend architecture.
