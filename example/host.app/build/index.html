@@ -3,22 +3,22 @@
 <head>
     <title>HOST APP</title>
     <meta content="initial-scale=1, width=device-width" name="viewport"/>
-    <link href="css/style.css" rel="stylesheet"/>
-    <!-- TEMP LOCALLY SERVING SUB APP 1 & 2 -->
+
     <script type="importmap">
         {
           "imports": {
             "@mf/react": "https://esm.sh/react@beta",
             "@mf/react-dom": "https://esm.sh/react-dom@beta/client",
             "@mf/react-router-dom": "https://esm.sh/react-router-dom?deps=react@beta,react-dom@beta/client&bundle=all",
-            "@mf/sub-app1": "http://localhost:8077/build/index.mjs",
-            "@mf/sub-app2": "http://localhost:8078/build/index.mjs"
+            "@mf/sub-app1": "http://localhost:8077/index.js",
+            "@mf/sub-app2": "http://localhost:8078/index.js"
           }
         }
     </script>
+  <script type="module" crossorigin src="/index.mjs"></script>
+  <link rel="stylesheet" crossorigin href="/style.css">
 </head>
 <body>
 <div id="root"></div>
-<script src="/js/index.jsx" type="module"></script>
 </body>
 </html>

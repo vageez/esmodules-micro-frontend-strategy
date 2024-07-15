@@ -1,0 +1,12 @@
+{
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "path": "latest",
+        "vite": "latest",
+        "vite-plugin-externalize-dependencies": "^0.13.0"
+    }
+}

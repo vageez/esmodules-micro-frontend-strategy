@@ -1,17 +1,9 @@
-import React from "react";
-import { createRoot } from "react-dom";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import React from "@mf/react";
+import { createRoot } from "@mf/react-dom";
+import { BrowserRouter, Link, Route, Routes } from "@mf/react-router-dom";
+import SubApp1 from "@mf/sub-app1";
+import SubApp2 from "@mf/sub-app2";
 
-
-const SubAppLoader = ({ name }) => {
-    const SubApp = React.lazy(() => import(name));
-    console.log("SubAppLoader", SubApp);
-    return (
-        <React.Suspense fallback={<div>Loading...</div>}>
-            <SubApp/>
-        </React.Suspense>
-    );
-};
 
 const Home = () => {
     return (
@@ -42,8 +34,8 @@ const App = () => {
             </nav>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/sub-app1" element={<SubAppLoader name="sub-app1"/>}/>
-                <Route path="/sub-app2" element={<SubAppLoader name="sub-app2"/>}/>
+                <Route path="/sub-app1" element={<SubApp1/>}/>
+                <Route path="/sub-app2" element={<SubApp2/>}/>
                 <Route path="/login" element={<Login/>}/>
             </Routes>
         </div>
