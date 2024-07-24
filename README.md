@@ -15,6 +15,16 @@ Some tools in existence today that enable the support of micro front end
 architecture. [Single Spa](https://single-spa.js.org/), [Module Federation](https://module-federation.io/), [Luigi Project](https://luigi-project.io/)
 and there are several more.
 
+### Strategy
+
+- Apps should run independently. Enabling the following...
+    - Important. When one app fails, the rest of the App should continue to function.
+    - Important. When working on one app, other apps should not be visible.
+        - Unless it is related to the app being worked on. (Shared Graphical components etc)
+    - Testing independently.
+    - Deployed independently.
+    - Developed independently.
+
 ### ESModules
 
 The state of ESModules in 2024 may have opened the possibility of easy micro front end architectures. together with
@@ -44,7 +54,7 @@ reducing the overhead associated with traditional module bundling.
 - (ESM.SH)[https://esm.sh/]
     - Remotely hosted dependencies ESModules
 - Javascript (Import Maps)[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap]
-    - Used to map remote dependencies.
+    - Used to map to remote dependencies. IE: Micro Front Ends Sub Applications.
     - Consider this as a type of configuration that the host app and sub apps can use to ensure that they all use the
       same versions of dependencies.
 - Importing remotely hosted javascript modules EG: `const React from import('https://esm.sh/react@beta')`
@@ -88,10 +98,12 @@ reducing the overhead associated with traditional module bundling.
     - Fetching dependencies from ESM.sh required some manual work to include the correct versions of internal
       dependencies.
         - EG: `"react-router-dom": "https://esm.sh/react-router-dom?deps=react@beta,react-dom@beta/client&bundle=all"`
-  
-    
 
+#### TODO
 
+- Error handling.
+    - https://www.npmjs.com/package/react-error-boundary
+- Docker set up for local development.
  
     
 

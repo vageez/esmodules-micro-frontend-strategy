@@ -1,7 +1,7 @@
 {
     "name": "esmodule-micro-frontend-strategy",
     "version": "1.0.0",
-    "description": "",
+    "description": "Serving multiple micro frontends applications on different ports",
     "scripts": {
         "host": "serve ./host.app -l 8075 --debug -s & open http://localhost:8075",
         "subapp1": "serve ./sub.app1 -l 8077 --debug --cors",
