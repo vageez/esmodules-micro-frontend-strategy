@@ -104,6 +104,9 @@ reducing the overhead associated with traditional module bundling.
 - Error handling.
     - https://www.npmjs.com/package/react-error-boundary
 - Docker set up for local development.
+- Manage a central import map.
+    - That can be shared with all sub apps and the host app.
+    - That works for local development and production.
  
     
 

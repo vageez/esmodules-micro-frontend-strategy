@@ -3,6 +3,20 @@ import { defineConfig } from "vite";
 import externalize from "vite-plugin-externalize-dependencies";
 
 
+const injectImportMap = () => {
+    return {
+        name: "html-transform",
+        transformIndexHtml(html) {
+            const newHtml = html.replace(
+                /<script type="module" src="\/@vite\/client"><\/script>/,
+                `<script src="./static/js/importmap.js"></script><script type="module" src="/@vite/client"></script>`
+            );
+            return newHtml;
+        }
+    };
+};
+
+
 export default defineConfig({
     root: resolve("./"),
     server: {
@@ -30,7 +44,8 @@ export default defineConfig({
             externals: [
                 (moduleName) => moduleName.includes("@mf/")
             ]
-        })
+        }),
+        injectImportMap()
     ],
     // PRODUCTION BUILD
     build: {
@@ -39,7 +54,7 @@ export default defineConfig({
         target: "esnext",
         lib: {
             // Could also be a dictionary or array of multiple entry points
-            entry: resolve(__dirname, "js/index.jsx"),
+            entry: resolve(__dirname, "src/index.jsx"),
             name: "host-app",
             // the proper extensions will be added
             fileName: "index",
