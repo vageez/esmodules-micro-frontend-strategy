@@ -1,3 +1,5 @@
+## Web Platform Module Architecture
+
 ### July 2024
 
 In the rapidly evolving landscape of web development, the need for scalable and maintainable architectures is paramount.
