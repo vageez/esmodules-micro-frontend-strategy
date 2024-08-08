@@ -1,21 +1,37 @@
-### ESMODULES
+### FROM END MODULE ARCHITECTURE EXAMPLE
 
-Basic example of using ESMODULES to create a micro frontend architecture.
+This Example demonstrates running the Host App in development mode, while consuming built Sub App Modules from a remote
+endpoint.
 
-```
-// EG:
-import React from "https://esm.sh/react@beta";
-import SubApp from "https:my-domain/subapp/index.js";
+How to run the example.
 
-```
+# STEP 1
 
-### Why a package.json
+### host.app/
 
-Sole purpose of the package.json is to serve the host app and 2 sub apps in order to test the example.
+1. Go to host.app/package.json
+2. Run npm install
+    * <i>This will bring in vite dependencies needed to enable local development.</i>
 
--- Host App is running on port 8075
--- Sub App 1 is running on port 8077
--- Sub App 2 is running on port 8078
+# STEP 2
 
-In essence Sub App 1 and 2 are served from endpoints that are different from the Host App.
-Allowing for development and deployment of Sub apps to be decoupled from the Host and other Sub apps. 
+### sub.app1/ & sub.app2/
+
+1. Nothing to do. These apps are already built and ready to be served from their designated ports.
+
+# STEP 3
+
+1. Go to package.json in the root of the example directory.
+2. Run npm install
+3. Run npm run dev
+    * This will start the host app in development mode.
+    * The host app will be available at  http://localhost:5173/
+    * The sub apps will be available at http://localhost:8077
+      and http://localhost:8078
+
+That's it. You should now be able to see the host app running in development mode, consuming the sub apps from the
+remote
+
+
+
+ 

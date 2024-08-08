@@ -7,6 +7,6 @@
     "devDependencies": {
         "path": "latest",
         "vite": "latest",
-        "vite-plugin-externalize-dependencies": "^0.13.0"
+        "vite-plugin-externalize-dependencies": "latest"
     }
 }

@@ -20,7 +20,7 @@ export default defineConfig({
     plugins: [
         externalize({
             externals: [
-                (moduleName) => moduleName.includes("@mf/")
+                (moduleName) => moduleName.includes("@mf")
             ]
         })
     ],
@@ -39,7 +39,7 @@ export default defineConfig({
         },
         rollupOptions: {
             external: [
-                /^@mf\/.*/
+                /^@mf.*/
             ]
         }
     }

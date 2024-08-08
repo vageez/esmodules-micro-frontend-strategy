@@ -2,49 +2,33 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import externalize from "vite-plugin-externalize-dependencies";
 
+
 const importMapPlugin = () => {
     return {
-        name: 'html-transform',
+        name: "html-transform",
         transformIndexHtml(html) {
             const importMapRegex =
                 /<script .*? data-src-type="importmap".*?>.*?<\/script>/;
-            const importMap = html.match(importMapRegex)?.[0];
+            const importMap = html.match(importMapRegex)?.[ 0 ];
 
             if (!importMap) {
                 return html;
             }
 
-            return html.replace(/<head>/, `<head>\n\t\t${importMap}`)
-        },
-    }
-}
+            return html.replace(/<head>/, `<head>\n\t\t${importMap}`);
+        }
+    };
+};
 
 export default defineConfig({
-    root: resolve("./"),
+    // LOCAL DEVELOPMENT
     server: {
-        hmr: true,
-        proxy: {
-            /**
-             * FOR NOW IMPORT MAP POINTS TO LOCALLY BUILT FILES
-             * AS LOCALLY BUILT FILES DO NOT HAVE {sub-app} name in path
-             * SO PROXY CANNOT BE LEVERAGED
-             * */
-            "sub-app1": {
-                target: "http://localhost:8077/build/"
-            },
-            "sub-app2": {
-                target: "http://localhost:8078/build/"
-            },
-            "/api": {
-                target: "http://localhost:8090/",
-                changeOrigin: true
-            }
-        }
+        hmr: true
     },
     plugins: [
         externalize({
             externals: [
-                (moduleName) => moduleName.includes("@mf/")
+                (moduleName) => moduleName.includes("@mf")
             ]
         }),
         importMapPlugin()
@@ -67,8 +51,9 @@ export default defineConfig({
                 main: resolve(__dirname, "index.html")
             },
             external: [
-                /^@mf\/.*/
+                /^@mf.*/
             ]
         }
     }
 });
+

@@ -1,25 +1,37 @@
-import React from "@mf/react";
+import React, { lazy, Suspense, useEffect, useState } from "@mf/react";
 import { createRoot } from "@mf/react-dom";
-import { BrowserRouter, Link, Route, Routes } from "@mf/react-router-dom";
-import SubApp1 from "@mf/sub-app1";
-import SubApp2 from "@mf/sub-app2";
+import { BrowserRouter, Link, Route, Routes, useLocation } from "@mf/react-router-dom";
+import { ErrorBoundary } from "@mf/react-error-boundary";
 
 
-const Home = () => {
+const DynamicComponent = () => {
+    const location = useLocation();
+    const [ pathName, setPathName ] = useState(window.location.pathname);
+
+    useEffect(() => {
+        setPathName(window.location.pathname);
+    }, [ location ]);
+
+    const Page = lazy(() => import( /* @vite-ignore */ `@mf${pathName}`));
     return (
-        <div>
-            <h1>Home Page</h1>
-        </div>
+        <Suspense fallback={<div>{`Fetching @mf${pathName}`}</div>}>
+            <ErrorBoundary fallback={<div>{`Could not find Module @mf${pathName}, check your importmap.`}</div>}>
+                <Page/>
+            </ErrorBoundary>
+        </Suspense>
     );
 };
 
-const Login = () => {
-    return (
-        <div>
-            <h1>Login Page</h1>
-        </div>
-    );
-};
+const Home = () =>
+    <div>
+        <h1>Home Page</h1>
+    </div>;
+
+const Login = () =>
+    <div>
+        <h1>Login Page</h1>
+    </div>;
+
 
 const App = () => {
     return (
@@ -29,14 +41,14 @@ const App = () => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/sub-app1">Sub App 1</Link></li>
                     <li><Link to="/sub-app2">Sub App 2</Link></li>
+                    <li><Link to="/sub-app3">Sub App 3 (Does not exist)</Link></li>
                     <li><Link to="/login">Login</Link></li>
                 </ul>
             </nav>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/sub-app1" element={<SubApp1/>}/>
-                <Route path="/sub-app2" element={<SubApp2/>}/>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/*" element={<DynamicComponent path={window.location.pathname}/>}/>
             </Routes>
         </div>
     );
