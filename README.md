@@ -52,27 +52,27 @@ reducing the overhead associated with traditional module bundling.
 
 ### Tools used.
 
-- React 19/beta (ESM support)
+- React Served from (ESM.sh)
+    - It is important to hightlight the React must be served from ESM, as the ESModule is what is required. CommonJS React will not work.
 - (ESM.SH)[https://esm.sh/]
     - Remotely hosted dependencies ESModules
 - Javascript (Import Maps)[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap]
-    - Used to map to remote dependencies. IE: Micro Front Ends Sub Applications.
-    - Consider this as a type of configuration that the host app and sub apps can use to ensure that they all use the
-      same versions of dependencies.
-- Importing remotely hosted javascript modules EG: `const React from import('https://esm.sh/react@beta')`
+    - Used to map to remote dependencies. IE: Module Micro Front End Applications.
+    - Import map replaces package.json
+- Importing remotely hosted javascript modules EG: `import React from 'https://esm.sh/react'`
 
 ### Example
 
-- Note: This example is a proof of concept and may not be suitable for production use. It is intended to demonstrate the
+- Note: This example is a proof of concept. It is intended to demonstrate the
   feasibility of using dynamically fetching ESModules to create a micro frontend architecture.
-- All sub applications MUST be built as ESModules.
-- Sub application import path must be defined in the host applications import maps.
+- All sub applications MUST be built as ESModules. To ensure composability with one another.
+- All subaplications import path must be defined in the host applications import map (Host App owns the index.html).
 
 1. [Host Application](example/host.app):
     - Built with React and React Router for navigation.
-    - Serves as the parent or host application integrating micro frontends (sub-applications).
+    - Serves as the parent or host application integrating micro frontend modules (sub-applications).
     - Utilizes dynamic imports and React.lazy for loading sub-applications on demand.
-    - Defines routes for the home page, login page, and placeholders for sub-applications.
+    - Defines routes for the home page, login page and sub-applications.
     - Sub-applications are loaded as needed based on the route, demonstrating a lazy loading pattern to enhance
       performance and separation of concerns.
 
@@ -82,13 +82,28 @@ reducing the overhead associated with traditional module bundling.
     - For simplicity the sub app examples are exporting an already transpiled version of the code.
     - Can be dynamically imported into the host application as demonstrated in the host application's code.
 
+
+
 ### EXAMPLE: Local development
+
+Note: When Locally developing on one of the applications in the Web Platform Module Architecture.
+- There could be a dependency that exists for one of its peer modules.
+    - These dependencies must exist in a deployed environment so that they can be consumed.
+    - EX: Say we are working on Sub App 3, and we have a dependency on React and Sub App 2.
+      The import map must have a reference to React and Sub App 2.
+```
+imports: {
+    "react": "https//esm.sh/react",
+    "subapp2": "https//test.myapp.com/subapp2/index.mjs",
+}
+```
+
 
 - Since all dependencies are remotely hosted there are NO NODE MODULES to install.
 - Host app is set up for local development.
-    - There is no fancy tooling at the moment (HMR etc).
+    - There is no fancy tooling at the moment.
 - Sub apps are simply there for demonstration purposes.
-    - Setting up local development is trivial, as loong as the end result is an ESMODULE export file.
+    - Setting up local development is trivial, as long as the end result is an ESMODULE export file.
     - Although not in JSX, updating the sub apps index.js, and reloading the app should reflect the changes.
 
 ### Observations
@@ -100,6 +115,7 @@ reducing the overhead associated with traditional module bundling.
     - Fetching dependencies from ESM.sh required some manual work to include the correct versions of internal
       dependencies.
         - EG: `"react-router-dom": "https://esm.sh/react-router-dom?deps=react@beta,react-dom@beta/client&bundle=all"`
+
 
 #### TODO
 
