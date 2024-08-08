@@ -2,20 +2,22 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import externalize from "vite-plugin-externalize-dependencies";
 
-
-const injectImportMap = () => {
+const importMapPlugin = () => {
     return {
-        name: "html-transform",
+        name: 'html-transform',
         transformIndexHtml(html) {
-            const newHtml = html.replace(
-                /<script type="module" src="\/@vite\/client"><\/script>/,
-                `<script src="./static/js/importmap.js"></script><script type="module" src="/@vite/client"></script>`
-            );
-            return newHtml;
-        }
-    };
-};
+            const importMapRegex =
+                /<script .*? data-src-type="importmap".*?>.*?<\/script>/;
+            const importMap = html.match(importMapRegex)?.[0];
 
+            if (!importMap) {
+                return html;
+            }
+
+            return html.replace(/<head>/, `<head>\n\t\t${importMap}`)
+        },
+    }
+}
 
 export default defineConfig({
     root: resolve("./"),
@@ -45,7 +47,7 @@ export default defineConfig({
                 (moduleName) => moduleName.includes("@mf/")
             ]
         }),
-        injectImportMap()
+        importMapPlugin()
     ],
     // PRODUCTION BUILD
     build: {
